@@ -1,5 +1,6 @@
 const searchInput = document.getElementById('searchInput');
 const clearBtn = document.getElementById('clearBtn');
+const searchServerBtn = document.getElementById('searchBtn');
 const bookList = document.getElementById('bookList');
 const noResults = document.getElementById('noResults');
 const noResultsQuery = document.getElementById('noResultsQuery');
@@ -34,7 +35,12 @@ function normalize(str) {
 function searchBooks(query) {
     const q = normalize(query.trim());
     if (!q) return [];
-    return BOOKS.filter(book => {
+    fetch('/search', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: q })
+    })
+    return [];/*BOOKS.filter(book => {  
         const haystack = normalize([
             book.title,
             book.author,
@@ -43,7 +49,7 @@ function searchBooks(query) {
             ...(book.tags || [])
         ].join(' '));
         return haystack.includes(q);
-    });
+    });*/
 }
 
 function highlight(text, query) {
@@ -118,11 +124,12 @@ function onSearch() {
         searchHint.hidden = false;
         return;
     }
-
+    console.log("Searching for:", query);
     renderResults(searchBooks(query), query);
 }
 
-searchInput.addEventListener('input', onSearch);
+//searchInput.addEventListener('input', onSearch);
+searchServerBtn.addEventListener('click', onSearch);
 
 clearBtn.addEventListener('click', () => {
     searchInput.value = '';
