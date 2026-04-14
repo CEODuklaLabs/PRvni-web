@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knihovna</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <span class="logo">📚 Knihovna</span>
+            <nav>
+                <a href="index.html">Hledat</a>
+                <a href="list.html">Všechny knihy</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="search-page">
+        <div class="search-hero">
+            <h1>Najděte svou knihu</h1>
+            <div class="search-bar">
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Zadejte název, autora nebo žánr…"
+                    autocomplete="off"
+                />
+                <button id="clearBtn" class="clear-btn" title="Smazat">✕</button>
+            </div>
+            <p class="search-hint" id="searchHint">Začněte psát pro vyhledávání…</p>
+        </div>
+
+        <section class="results-section" id="resultsSection">
+            <div class="results-meta" id="resultsMeta"></div>
+            <ul class="book-list" id="bookList"></ul>
+            <div class="no-results" id="noResults" hidden>
+                <span>🔍</span>
+                <p>Žádné výsledky pro <strong id="noResultsQuery"></strong></p>
+            </div>
+        </section>
+    </main>
+
+    <script src="../static/js/books.js"></script>
+    <script src="../static/js/search.js"></script>
+</body>
+</html>

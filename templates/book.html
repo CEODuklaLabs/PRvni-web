@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail knihy – Knihovna</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <span class="logo">📚 Knihovna</span>
+            <nav>
+                <a href="index.html">Hledat</a>
+                <a href="list.html">Všechny knihy</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="book-page">
+        <a href="javascript:history.back()" class="back-link">← Zpět</a>
+
+        <div class="book-detail" id="bookDetail">
+            <div class="book-cover-wrap">
+                <img id="bookCover" src="" alt="Přebal knihy" class="book-cover" />
+                <div class="book-availability" id="bookAvailability"></div>
+            </div>
+
+            <div class="book-info">
+                <h1 id="bookTitle" class="book-title"></h1>
+                <p id="bookAuthor" class="book-author"></p>
+
+                <table class="info-table">
+                    <tbody id="infoTable"></tbody>
+                </table>
+
+                <div class="book-description">
+                    <h2>Anotace</h2>
+                    <p id="bookDescription"></p>
+                </div>
+
+                <div class="book-tags" id="bookTags"></div>
+            </div>
+        </div>
+
+        <div class="not-found" id="notFound" hidden>
+            <span>📕</span>
+            <p>Kniha nebyla nalezena.</p>
+            <a href="index.html">Zpět na vyhledávání</a>
+        </div>
+    </main>
+
+    <script src="../static/js/books.js"></script>
+    <script src="../static/js/book.js"></script>
+</body>
+</html>
