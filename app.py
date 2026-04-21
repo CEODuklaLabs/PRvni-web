@@ -6,7 +6,7 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/search', methods=['POST'])
+@app.post('/search')
 def search():
     query = request.json.get('query', '')
     print(f"Received search query: {query}")  # Debugging statement
