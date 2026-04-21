@@ -12,7 +12,22 @@ def search():
     print(f"Received search query: {query}")  # Debugging statement
     if query:
         # Simulate a search operation (you can replace this with actual search logic)
-        results = f"Results for '{query}'"
+        results = {
+            "id": 1,
+            "title": "Babička",
+            "author": "Božena Němcová",
+            "year": 1855,
+            "genre": "Próza",
+            "pages": 224,
+            "publisher": "Odeon",
+            "isbn": "978-80-207-1234-5",
+            "language": "Čeština",
+            "available": True,
+            "cover": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Bozena_Nemcova_Babicka.jpg/220px-Bozena_Nemcova_Babicka.jpg",
+            "description": "Babička je klasické dílo české literatury, které zachycuje idylický život na českém venkově. Němcová v něm vylíčila vzpomínky na své dětství a postavu své vlastní babičky.",
+            "tags": ["klasika", "česká literatura", "venkov"]
+        }
+
         return jsonify({'results': results})
     else:
         return jsonify({'error': 'No query provided'}), 400
