@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template
-
+import json
+import unicodedata
 app = Flask(__name__)
 
 @app.route('/')
@@ -9,24 +10,18 @@ def home():
 @app.post('/search')
 def search():
     query = request.json.get('query', '')
+    results = []
     print(f"Received search query: {query}")  # Debugging statement
     if query:
         # Simulate a search operation (you can replace this with actual search logic)
-        results = {
-            "id": 1,
-            "title": "Babička",
-            "author": "Božena Němcová",
-            "year": 1855,
-            "genre": "Próza",
-            "pages": 224,
-            "publisher": "Odeon",
-            "isbn": "978-80-207-1234-5",
-            "language": "Čeština",
-            "available": True,
-            "cover": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Bozena_Nemcova_Babicka.jpg/220px-Bozena_Nemcova_Babicka.jpg",
-            "description": "Babička je klasické dílo české literatury, které zachycuje idylický život na českém venkově. Němcová v něm vylíčila vzpomínky na své dětství a postavu své vlastní babičky.",
-            "tags": ["klasika", "česká literatura", "venkov"]
-        }
+        with open('lib.json', 'r', encoding='utf-8') as f:
+            books = json.load(f)
+            for book in books:
+                name = book['title'].lower()
+                name = ''.join(c for c in unicodedata.normalize('NFD', name) if unicodedata.category(c) != 'Mn')
+                print(f"Checking item: {name}")  # Debugging statement
+                if query.lower() in name:
+                    results.append(book)
 
         return jsonify({'results': results})
     else:

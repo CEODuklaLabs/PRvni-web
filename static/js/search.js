@@ -32,24 +32,23 @@ function normalize(str) {
         .replace(/[\u0300-\u036f]/g, '');
 }
 
-function searchBooks(query) {
+async function searchBooks(query) {
+    console.log('Initiating search for:', query);
     const q = normalize(query.trim());
+    console.log('Normalized query:', q);
     if (!q) return [];
-    fetch('/search', {
+    response = await fetch('/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: q })
-    })
-    return [];/*BOOKS.filter(book => {  
-        const haystack = normalize([
-            book.title,
-            book.author,
-            book.genre,
-            book.description,
-            ...(book.tags || [])
-        ].join(' '));
-        return haystack.includes(q);
-    });*/
+    });
+    if (!response.ok) {
+        console.error('Search request failed:', response.statusText);
+        return [];
+    }
+    const data = await response.json();
+    console.log('Search results:', data);
+    return data.books || [];
 }
 
 function highlight(text, query) {
