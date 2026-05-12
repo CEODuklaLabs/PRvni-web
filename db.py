@@ -28,9 +28,7 @@ def init_db():
             language  TEXT,
             available INTEGER NOT NULL DEFAULT 1,
             cover     TEXT,
-            description TEXT,
-            reserve1 INTEGER,
-                       
+            description TEXT
         );
 
         CREATE TABLE IF NOT EXISTS book_tags (
@@ -115,4 +113,6 @@ def search_books(query):
 
 
 if __name__ == '__main__':
-    a= int(input("zadejte cislo:"))
+    init_db()
+    import_from_json()
+    print(f'Celkem knih v databázi: {len(get_all_books())}')
